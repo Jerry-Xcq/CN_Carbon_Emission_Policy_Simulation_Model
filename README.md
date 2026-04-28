@@ -1,25 +1,18 @@
 # CN Carbon Emission Policy Simulation Model
 
-This repository currently hosts the public project page for a China-localized vehicle carbon-emission policy simulation web app.
+CN Carbon Emission Policy Simulation Model is a China-focused vehicle policy simulation project designed to evaluate how regulatory pathways, market assumptions, and technology constraints may shape passenger-vehicle carbon-emission outcomes.
 
-The live project page is built from `docs/` and can be published with GitHub Pages.
+The public site introduces the project concept, workflow, deployment direction, and planned demonstration materials. It is intended as a project-facing landing page for researchers, policy analysts, and collaborators.
 
-## Current Scope
+## Project Highlights
 
-The public repository includes:
+- China-localized policy simulation workflow for passenger-vehicle carbon-emission analysis
+- Browser-based interaction design for scenario configuration and result review
+- Support for policy inputs, model run tracking, summary metrics, logs, and output files in the full local application
+- A deployment path from local research use to server-hosted access for broader collaboration
 
-- Static project introduction page
-- Deployment notes for GitHub Pages
-- Placeholder for a local web-app demonstration video
+## Public Preview
 
-The core simulation model and local runner code are not included in this public release yet.
+This repository currently publishes the project page only. The core simulation model and local execution package are planned for a later release stage.
 
-## GitHub Pages
-
-Use the following repository settings:
-
-```text
-Settings -> Pages -> Build and deployment -> Source -> Deploy from a branch
-Branch: main
-Folder: /docs
-```
+The GitHub Pages site is built from the `docs/` directory.
