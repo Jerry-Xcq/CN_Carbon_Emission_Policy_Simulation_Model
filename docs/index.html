@@ -262,6 +262,9 @@
       background: #fff;
       padding: 10px;
       min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .metric span {
@@ -269,7 +272,9 @@
       color: var(--muted);
       font-size: 10px;
       line-height: 1.35;
-      overflow-wrap: anywhere;
+      overflow-wrap: normal;
+      word-break: normal;
+      hyphens: none;
     }
 
     .metric strong {
@@ -840,10 +845,10 @@
             </div>
             <div class="preview-main">
               <div class="metric-row">
-                <div class="metric"><span>Manufacturers</span><strong>20</strong></div>
+                <div class="metric"><span>OEMs</span><strong>20</strong></div>
                 <div class="metric"><span>Vehicle Records</span><strong>15.3k</strong></div>
                 <div class="metric"><span>2031 Avg. Cost</span><strong>44.0k</strong></div>
-                <div class="metric"><span>NEV Credits for CAFC</span><strong>4,923</strong></div>
+                <div class="metric"><span>NEV Credits<br>for CAFC</span><strong>4,923</strong></div>
               </div>
               <div class="chart" aria-label="Example cost signal chart">
                 <svg viewBox="0 0 520 214" role="img" aria-label="Example cost signal chart">
