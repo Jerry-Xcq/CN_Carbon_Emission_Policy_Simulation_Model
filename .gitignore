@@ -1,0 +1,34 @@
+# Python cache and local environments
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+
+# Local web app runtime outputs
+web_runs/
+web_server.log
+web_server.err.log
+*.log
+
+# Private model and local runner code.
+# Keep these out of the public GitHub Pages repository for now.
+omega_model/
+web_app.py
+omega_web_runner.py
+WEB_APP_README.md
+
+# Local editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Large demo videos can be committed intentionally when ready.
+# Keep the placeholder file so docs/assets exists.
+docs/assets/*.mp4
+!docs/assets/.gitkeep

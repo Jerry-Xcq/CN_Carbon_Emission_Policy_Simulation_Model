@@ -1,0 +1,914 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CN OMEGA | 中国乘用车政策推演工作台</title>
+  <meta name="description" content="CN OMEGA 是面向中国乘用车政策情景的本地化 OMEGA 模型网页工作台，支持参数配置、模型运行、结果摘要和输出文件下载。">
+  <style>
+    :root {
+      --ink: #17212b;
+      --muted: #5e6874;
+      --paper: #f6f7f8;
+      --panel: #ffffff;
+      --line: #d8e0e5;
+      --navy: #183349;
+      --teal: #2f7d64;
+      --blue: #22577a;
+      --amber: #a06a21;
+      --red: #b4463a;
+      --shadow: 0 18px 44px rgba(22, 35, 48, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font: 15px/1.58 "Microsoft YaHei", "PingFang SC", "Segoe UI", Arial, sans-serif;
+      letter-spacing: 0;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .shell {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(246, 247, 248, 0.94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      min-height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+    }
+
+    .mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      background: var(--navy);
+      color: #fff;
+      font-size: 13px;
+      letter-spacing: 0;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0 15px;
+      border-radius: 6px;
+      border: 1px solid var(--navy);
+      background: var(--navy);
+      color: #fff;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .button.secondary {
+      background: #fff;
+      color: var(--navy);
+      border-color: #b8c8d4;
+    }
+
+    .hero {
+      min-height: calc(100vh - 66px);
+      display: grid;
+      align-items: center;
+      padding: 58px 0 34px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.88fr) minmax(520px, 1.12fr);
+      gap: 42px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      margin: 0 0 16px;
+      color: var(--teal);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 720px;
+      font-size: clamp(42px, 6vw, 78px);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .hero-copy {
+      max-width: 650px;
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 34px;
+      max-width: 650px;
+    }
+
+    .fact {
+      border-left: 3px solid var(--teal);
+      padding: 4px 0 4px 12px;
+    }
+
+    .fact strong {
+      display: block;
+      font-size: 22px;
+      line-height: 1.1;
+    }
+
+    .fact span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .preview {
+      background: #dfe6eb;
+      border: 1px solid #c5d0d8;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .preview-bar {
+      height: 40px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 14px;
+      border-bottom: 1px solid #c5d0d8;
+      background: #edf2f4;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--red);
+    }
+
+    .dot:nth-child(2) { background: var(--amber); }
+    .dot:nth-child(3) { background: var(--teal); }
+
+    .preview-body {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      min-height: 480px;
+      background: #f7f9fa;
+    }
+
+    .preview-side {
+      padding: 16px;
+      border-right: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .mini-title {
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .field {
+      height: 34px;
+      border: 1px solid #cbd4dc;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, #fff 0 68%, #eef3f5 68% 100%);
+    }
+
+    .run-button {
+      height: 38px;
+      border-radius: 6px;
+      background: var(--blue);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+      font-weight: 800;
+      margin-top: 14px;
+    }
+
+    .preview-main {
+      min-width: 0;
+      padding: 18px;
+    }
+
+    .metric-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .metric {
+      min-height: 88px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      padding: 12px;
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 12px;
+      font-size: 20px;
+    }
+
+    .chart {
+      height: 214px;
+      margin-top: 12px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background:
+        linear-gradient(#eef2f5 1px, transparent 1px) 0 0 / 100% 25%,
+        linear-gradient(90deg, #eef2f5 1px, transparent 1px) 0 0 / 12.5% 100%,
+        #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chart::before,
+    .chart::after {
+      content: "";
+      position: absolute;
+      inset: 32px 22px 36px;
+      border-radius: 46% 54% 40% 60%;
+      border: 4px solid transparent;
+      border-top-color: var(--teal);
+      border-right-color: var(--teal);
+      transform: rotate(-7deg);
+    }
+
+    .chart::after {
+      inset: 58px 22px 42px;
+      border-top-color: var(--amber);
+      border-right-color: var(--amber);
+      transform: rotate(8deg);
+      opacity: 0.88;
+    }
+
+    .files {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .file {
+      min-height: 48px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      padding: 10px 12px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    section {
+      padding: 74px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr);
+      gap: 36px;
+      align-items: start;
+      margin-bottom: 30px;
+    }
+
+    .section-kicker {
+      margin: 0;
+      color: var(--teal);
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    h2 {
+      margin: 8px 0 0;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .section-copy {
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      min-height: 198px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      box-shadow: 0 10px 26px rgba(22, 35, 48, 0.07);
+    }
+
+    .num {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      background: #e8f2ef;
+      color: var(--teal);
+      font-weight: 800;
+      margin-bottom: 22px;
+    }
+
+    h3 {
+      margin: 0 0 10px;
+      font-size: 19px;
+      line-height: 1.25;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .workflow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .step {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+      min-height: 170px;
+      position: relative;
+    }
+
+    .step::after {
+      content: "";
+      position: absolute;
+      top: 36px;
+      right: -12px;
+      width: 12px;
+      height: 2px;
+      background: #b9c8d1;
+    }
+
+    .step:last-child::after { display: none; }
+
+    .tag {
+      display: inline-flex;
+      min-height: 26px;
+      align-items: center;
+      padding: 0 9px;
+      border-radius: 5px;
+      background: #eef3f5;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(360px, 0.74fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .demo-frame {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.42fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .demo-media {
+      aspect-ratio: 16 / 9;
+      min-height: 320px;
+      border: 1px solid #c5d0d8;
+      border-radius: 8px;
+      background: #17212b;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .demo-media video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      background: #17212b;
+    }
+
+    .demo-placeholder {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-content: center;
+      gap: 8px;
+      padding: 24px;
+      text-align: center;
+      color: #e7eef2;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px) 0 0 / 44px 44px,
+        linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px) 0 0 / 44px 44px,
+        #17212b;
+      pointer-events: none;
+    }
+
+    .demo-placeholder strong {
+      font-size: 24px;
+      line-height: 1.1;
+    }
+
+    .demo-placeholder span {
+      color: #b9c8d1;
+      font-size: 14px;
+    }
+
+    .demo-media.has-video .demo-placeholder { display: none; }
+
+    .demo-notes {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 24px;
+    }
+
+    .demo-notes ol {
+      margin: 14px 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    .demo-notes li { margin: 8px 0; }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 24px;
+    }
+
+    .mode-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .mode {
+      display: grid;
+      grid-template-columns: 112px minmax(0, 1fr);
+      gap: 18px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .mode:last-child { border-bottom: 0; }
+
+    .mode strong { color: var(--ink); }
+    .mode p { margin: 0; color: var(--muted); }
+
+    .terminal {
+      background: #16212b;
+      color: #e7eef2;
+      border-radius: 8px;
+      padding: 20px;
+      min-height: 100%;
+      font: 13px/1.7 Consolas, "Liberation Mono", monospace;
+      overflow: auto;
+    }
+
+    .terminal span { color: #8bc6ad; }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 16px;
+    }
+
+    .bars {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .bar {
+      height: 28px;
+      border-radius: 5px;
+      background: #edf2f4;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      background: var(--teal);
+    }
+
+    .bar:nth-child(2) span { background: var(--blue); }
+    .bar:nth-child(3) span { background: var(--amber); }
+
+    .stat-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    .stat-table th,
+    .stat-table td {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+    }
+
+    .stat-table th { color: var(--muted); font-weight: 600; }
+    .stat-table td:last-child { text-align: right; font-weight: 800; }
+
+    .cta {
+      background: var(--navy);
+      color: #fff;
+      border-radius: 8px;
+      padding: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .cta h2 {
+      color: #fff;
+      font-size: clamp(28px, 4vw, 44px);
+    }
+
+    .cta p {
+      color: #c7d4df;
+      margin: 12px 0 0;
+      max-width: 680px;
+    }
+
+    footer {
+      padding: 30px 0 42px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 960px) {
+      nav { display: none; }
+      .hero { min-height: auto; }
+      .hero-grid,
+      .section-head,
+      .split,
+      .demo-frame,
+      .results-grid {
+        grid-template-columns: 1fr;
+      }
+      .preview-body { grid-template-columns: 1fr; }
+      .preview-side { border-right: 0; border-bottom: 1px solid var(--line); }
+      .cards,
+      .workflow,
+      .facts {
+        grid-template-columns: 1fr;
+      }
+      .step::after { display: none; }
+      .cta { align-items: flex-start; flex-direction: column; }
+    }
+
+    @media (max-width: 640px) {
+      .shell { width: min(100% - 24px, 1180px); }
+      h1 { font-size: 42px; }
+      section { padding: 52px 0; }
+      .metric-row,
+      .files {
+        grid-template-columns: 1fr;
+      }
+      .preview-main,
+      .preview-side,
+      .panel,
+      .card,
+      .step,
+      .cta {
+        padding: 16px;
+      }
+      .mode { grid-template-columns: 1fr; gap: 6px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="shell nav">
+      <a class="brand" href="#top" aria-label="CN OMEGA 首页">
+        <span class="mark">CN</span>
+        <span>CN OMEGA</span>
+      </a>
+      <nav aria-label="页面导航">
+        <a href="#value">特点</a>
+        <a href="#workflow">流程</a>
+        <a href="#demo">演示</a>
+        <a href="#deploy">运行方式</a>
+        <a href="#results">结果</a>
+        <a class="button" href="#start">开始使用</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div>
+          <p class="eyebrow">China-localized Policy Simulation · Local Web App</p>
+          <h1>中国乘用车政策推演工作台</h1>
+          <p class="hero-copy">CN OMEGA 将本地化 OMEGA 模型包装成面向政策分析人员的网页工作台：配置情景、运行模型、查看关键指标、下载原始输出，都可以在浏览器内完成。</p>
+          <div class="hero-actions">
+            <a class="button" href="#start">查看运行方式</a>
+            <a class="button secondary" href="#workflow">了解工作流</a>
+          </div>
+          <div class="facts" aria-label="项目摘要">
+            <div class="fact"><strong>Web</strong><span>浏览器操作界面</span></div>
+            <div class="fact"><strong>OMEGA</strong><span>独立模型进程</span></div>
+            <div class="fact"><strong>CSV</strong><span>政策输入与结果输出</span></div>
+          </div>
+        </div>
+
+        <div class="preview" aria-label="CN OMEGA 网页工作台界面预览">
+          <div class="preview-bar">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+          <div class="preview-body">
+            <div class="preview-side">
+              <div class="mini-title">场景参数</div>
+              <div class="field"></div>
+              <div class="field"></div>
+              <div class="field"></div>
+              <div class="field"></div>
+              <div class="run-button">运行场景</div>
+            </div>
+            <div class="preview-main">
+              <div class="metric-row">
+                <div class="metric"><span>末年销量</span><strong>24.8</strong></div>
+                <div class="metric"><span>电池需求</span><strong>812</strong></div>
+                <div class="metric"><span>认证排放</span><strong>31.6</strong></div>
+                <div class="metric"><span>平均成本</span><strong>18.4k</strong></div>
+              </div>
+              <div class="chart"></div>
+              <div class="files">
+                <div class="file">summary_results.csv</div>
+                <div class="file">manufacturer_annual_data.csv</div>
+                <div class="file">vehicle_annual_data.csv</div>
+                <div class="file">run.log</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="value">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">01 · What It Solves</p>
+            <h2>把模型能力变成可操作的政策分析界面</h2>
+          </div>
+          <p class="section-copy">原始模型适合研究人员维护，网页工作台适合团队协作、情景复现和结果交付。CN OMEGA 保留 Python 模型的可追溯输出，同时把高频参数和政策输入放到浏览器里。</p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <div class="num">01</div>
+            <h3>情景配置</h3>
+            <p>支持分析年份、信用市场效率、价格响应、续航、生产约束和政策 CSV 输入，减少命令行操作负担。</p>
+          </article>
+          <article class="card">
+            <div class="num">02</div>
+            <h3>隔离运行</h3>
+            <p>每次网页提交都会启动独立 Python 进程，避免 OMEGA 模型全局状态互相污染，便于复现和排查。</p>
+          </article>
+          <article class="card">
+            <div class="num">03</div>
+            <h3>结果交付</h3>
+            <p>自动汇总关键指标、趋势序列和输出文件列表，让非代码用户也能查看和下载完整结果。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">02 · Workflow</p>
+            <h2>从政策假设到模型输出的完整链路</h2>
+          </div>
+          <p class="section-copy">网页服务只负责交互、文件上传、任务管理和结果展示；模型计算仍由本地化 OMEGA 代码完成。这个边界清楚，便于后续迁移到云服务器。</p>
+        </div>
+        <div class="workflow">
+          <article class="step">
+            <span class="tag">Input</span>
+            <h3>配置政策情景</h3>
+            <p>选择内置输入或上传 CSV，设定年份、市场和技术参数。</p>
+          </article>
+          <article class="step">
+            <span class="tag">Run</span>
+            <h3>启动模型进程</h3>
+            <p>服务端创建运行目录，写入请求参数并调用独立 runner。</p>
+          </article>
+          <article class="step">
+            <span class="tag">Parse</span>
+            <h3>提取摘要指标</h3>
+            <p>读取 summary CSV，生成卡片、趋势序列和文件索引。</p>
+          </article>
+          <article class="step">
+            <span class="tag">Deliver</span>
+            <h3>交付结果包</h3>
+            <p>在网页查看状态、日志、图表，并下载原始输出文件。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="demo">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">03 · Demo</p>
+            <h2>预留本地 Web 运行演示</h2>
+          </div>
+          <p class="section-copy">这里用于放置后续录屏：打开本地工作台、输入政策参数、提交运行、查看日志和结果摘要。视频会比静态截图更适合解释“这是一个可以实际运行模型的工具”。</p>
+        </div>
+        <div class="demo-frame">
+          <div class="demo-media">
+            <video controls poster="" preload="metadata" onloadedmetadata="this.closest('.demo-media').classList.add('has-video')">
+              <source src="assets/cn-omega-demo.mp4" type="video/mp4">
+            </video>
+            <div class="demo-placeholder">
+              <strong>Demo video placeholder</strong>
+              <span>录屏完成后放到 docs/assets/cn-omega-demo.mp4</span>
+            </div>
+          </div>
+          <div class="demo-notes">
+            <h3>建议录屏结构</h3>
+            <ol>
+              <li>启动 `python web_app.py` 并打开本地地址。</li>
+              <li>修改核心参数或上传政策 CSV。</li>
+              <li>点击运行，展示任务状态和日志刷新。</li>
+              <li>展示关键指标卡片、趋势图和输出文件下载。</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="deploy">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">04 · Deployment</p>
+            <h2>本地运行和云服务器运行都可以</h2>
+          </div>
+          <p class="section-copy">宣传页可以免费放在 GitHub Pages；真正运行模型的网页工作台需要 Python 后端。如果部署到云服务器，用户访问服务器域名和端口即可使用。</p>
+        </div>
+        <div class="split">
+          <div class="panel mode-list">
+            <div class="mode">
+              <strong>本地模式</strong>
+              <p>用户下载项目，在自己的电脑运行 `python web_app.py`，浏览器访问 `127.0.0.1:8765`。</p>
+            </div>
+            <div class="mode">
+              <strong>局域网模式</strong>
+              <p>在一台工作站运行服务并监听 `0.0.0.0`，同一网络内的成员访问该机器 IP 和端口。</p>
+            </div>
+            <div class="mode">
+              <strong>云服务器模式</strong>
+              <p>把项目部署到云服务器，配置登录、反向代理和权限控制，用户通过域名进入工作台。</p>
+            </div>
+          </div>
+          <pre class="terminal"><span># local preview</span>
+python web_app.py
+
+<span># browser</span>
+http://127.0.0.1:8765
+
+<span># server / LAN</span>
+$env:OMEGA_WEB_HOST="0.0.0.0"
+$env:OMEGA_WEB_PORT="8765"
+python web_app.py</pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="results">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">05 · Outputs</p>
+            <h2>结果不仅能看，也能完整下载和复核</h2>
+          </div>
+          <p class="section-copy">每次运行都会保留请求参数、运行状态、日志、摘要 JSON 和 OMEGA 原始输出目录，方便做审计、对比和后续制图。</p>
+        </div>
+        <div class="results-grid">
+          <div class="panel">
+            <h3>示例趋势指标</h3>
+            <div class="bars" aria-label="示例指标条形图">
+              <div class="bar"><span style="width: 74%"></span></div>
+              <div class="bar"><span style="width: 58%"></span></div>
+              <div class="bar"><span style="width: 86%"></span></div>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>运行目录结构</h3>
+            <table class="stat-table">
+              <tr><th>request.json</th><td>参数</td></tr>
+              <tr><th>status.json</th><td>状态</td></tr>
+              <tr><th>run.log</th><td>日志</td></tr>
+              <tr><th>summary.json</th><td>摘要</td></tr>
+              <tr><th>outputs/</th><td>原始输出</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="start">
+      <div class="shell">
+        <div class="cta">
+          <div>
+            <p class="section-kicker">06 · Start</p>
+            <h2>先用静态页宣传，再把运行端部署成服务</h2>
+            <p>当前仓库已经具备本地网页工作台；这个页面用于对外展示项目价值。后续若走云服务器路线，需要补登录、权限、队列、资源限制和持久化存储。</p>
+          </div>
+          <a class="button secondary" href="#deploy">查看本地运行说明</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">CN OMEGA · 中国乘用车政策推演工作台 · Static project page for GitHub Pages</div>
+  </footer>
+</body>
+</html>
