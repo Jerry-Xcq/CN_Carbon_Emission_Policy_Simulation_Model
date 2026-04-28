@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -128,8 +128,8 @@
     h1 {
       margin: 0;
       max-width: 720px;
-      font-size: clamp(42px, 6vw, 78px);
-      line-height: 0.98;
+      font-size: clamp(40px, 5.3vw, 68px);
+      line-height: 1.02;
       letter-spacing: 0;
     }
 
@@ -357,6 +357,37 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 16px;
     }
+
+    .audiences {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .audience {
+      min-height: 220px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      box-shadow: 0 10px 26px rgba(22, 35, 48, 0.07);
+    }
+
+    .audience strong {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--blue);
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    .audience ul {
+      margin: 12px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .audience li { margin: 7px 0; }
 
     .card {
       min-height: 198px;
@@ -629,6 +660,7 @@
       .preview-body { grid-template-columns: 1fr; }
       .preview-side { border-right: 0; border-bottom: 1px solid var(--line); }
       .cards,
+      .audiences,
       .workflow,
       .facts {
         grid-template-columns: 1fr;
@@ -666,6 +698,7 @@
       </a>
       <nav aria-label="Page navigation">
         <a href="#value">Highlights</a>
+        <a href="#collaboration">Collaboration</a>
         <a href="#workflow">Workflow</a>
         <a href="#demo">Demo</a>
         <a href="#deploy">Access</a>
@@ -679,8 +712,8 @@
     <section class="hero">
       <div class="shell hero-grid">
         <div>
-          <p class="eyebrow">China-localized Policy Simulation · Vehicle Carbon Emissions</p>
-          <h1>CN Carbon Emission Policy Simulation Model</h1>
+          <p class="eyebrow">China-localized Policy Simulation - Vehicle Carbon Emissions</p>
+          <h1>China Vehicle Carbon Policy Simulation Platform</h1>
           <p class="hero-copy">A browser-based research workflow for configuring policy scenarios, running vehicle carbon-emission simulations, reviewing summary indicators, and preparing reproducible outputs for policy analysis.</p>
           <div class="hero-actions">
             <a class="button" href="#start">View Project Status</a>
@@ -732,7 +765,7 @@
       <div class="shell">
         <div class="section-head">
           <div>
-            <p class="section-kicker">01 · What It Solves</p>
+            <p class="section-kicker">01 - What It Solves</p>
             <h2>Turning model capability into an operational policy analysis interface</h2>
           </div>
           <p class="section-copy">The project translates a technical simulation workflow into an interface that supports scenario design, repeatable runs, and results communication for carbon-emission policy analysis.</p>
@@ -757,11 +790,52 @@
       </div>
     </section>
 
+    <section id="collaboration">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">02 - Collaboration Value</p>
+            <h2>Built for policy evaluation, corporate planning, and data-driven research</h2>
+          </div>
+          <p class="section-copy">The project is positioned as a bridge between regulatory policy analysis and industry decision support. It can support collaborative studies with automakers, automotive data providers, research institutes, and policy teams.</p>
+        </div>
+        <div class="audiences">
+          <article class="audience">
+            <strong>Automakers</strong>
+            <h3>Scenario planning for compliance and technology pathways</h3>
+            <ul>
+              <li>Evaluate carbon-policy pressure under alternative regulatory assumptions.</li>
+              <li>Compare fleet electrification, cost, and sales-share pathways.</li>
+              <li>Prepare internal policy response and product strategy analysis.</li>
+            </ul>
+          </article>
+          <article class="audience">
+            <strong>Data and Analytics Institutions</strong>
+            <h3>Model-ready data workflows for vehicle-market research</h3>
+            <ul>
+              <li>Connect market, fleet, price, technology, and policy datasets.</li>
+              <li>Turn data assets into repeatable policy-simulation scenarios.</li>
+              <li>Generate structured outputs for dashboards, reports, and studies.</li>
+            </ul>
+          </article>
+          <article class="audience">
+            <strong>Research and Policy Teams</strong>
+            <h3>Transparent assumptions and reproducible simulation outputs</h3>
+            <ul>
+              <li>Track assumptions, input files, logs, and output packages by run.</li>
+              <li>Compare baseline, strict, and customized policy cases.</li>
+              <li>Support academic papers, policy briefs, and stakeholder workshops.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section id="workflow">
       <div class="shell">
         <div class="section-head">
           <div>
-            <p class="section-kicker">02 · Workflow</p>
+            <p class="section-kicker">03 - Workflow</p>
             <h2>A complete path from policy assumptions to simulation outputs</h2>
           </div>
           <p class="section-copy">The workflow separates user interaction from model execution. This keeps the research model traceable while creating a practical path toward shared server deployment.</p>
@@ -795,7 +869,7 @@
       <div class="shell">
         <div class="section-head">
           <div>
-            <p class="section-kicker">03 · Demo</p>
+            <p class="section-kicker">04 - Demo</p>
             <h2>Local web-app demonstration coming soon</h2>
           </div>
           <p class="section-copy">A recorded demonstration will show the local web app opening in the browser, receiving policy inputs, running a scenario, and displaying logs, summary metrics, and output files.</p>
@@ -827,7 +901,7 @@
       <div class="shell">
         <div class="section-head">
           <div>
-            <p class="section-kicker">04 · Deployment</p>
+            <p class="section-kicker">05 - Deployment</p>
             <h2>Designed for local research use and future server access</h2>
           </div>
           <p class="section-copy">The public project page can be hosted on GitHub Pages. The full simulation workflow requires a Python backend and can later be deployed on a controlled cloud server for authenticated access.</p>
@@ -865,7 +939,7 @@ python web_app.py</pre>
       <div class="shell">
         <div class="section-head">
           <div>
-            <p class="section-kicker">05 · Outputs</p>
+            <p class="section-kicker">06 - Outputs</p>
             <h2>Outputs are organized for review, download, and audit</h2>
           </div>
           <p class="section-copy">Each run is structured around saved inputs, status records, logs, summary data, and raw output files, supporting reproducibility and follow-up analysis.</p>
@@ -897,7 +971,7 @@ python web_app.py</pre>
       <div class="shell">
         <div class="cta">
           <div>
-            <p class="section-kicker">06 · Start</p>
+            <p class="section-kicker">07 - Start</p>
             <h2>Public preview now, full model release later</h2>
             <p>This public repository presents the project and demonstration interface. The complete local execution package and core model are planned for a later release or controlled deployment.</p>
           </div>
@@ -908,7 +982,7 @@ python web_app.py</pre>
   </main>
 
   <footer>
-    <div class="shell">CN Carbon Emission Policy Simulation Model · Public project page for GitHub Pages</div>
+    <div class="shell">CN Carbon Emission Policy Simulation Model - Public project page for GitHub Pages</div>
   </footer>
 </body>
 </html>
