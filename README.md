@@ -1,6 +1,6 @@
-# CN Carbon Emission Policy Simulation Model
+# China Vehicle Carbon Emission Policy Simulation Platform
 
-CN Carbon Emission Policy Simulation Model is a China-focused vehicle policy simulation project designed to evaluate how regulatory pathways, market assumptions, and technology constraints may shape passenger-vehicle carbon-emission outcomes.
+China Vehicle Carbon Emission Policy Simulation Platform is a China-focused vehicle policy simulation project designed to evaluate how regulatory pathways, market assumptions, and technology constraints may shape passenger-vehicle carbon-emission outcomes.
 
 The public site introduces the project concept, workflow, deployment direction, and planned demonstration materials. It is intended as a collaboration-facing landing page for automakers, automotive data institutions, researchers, policy analysts, and potential project partners.
 
@@ -19,6 +19,12 @@ The project is designed to support:
 - Automotive market and fleet data research
 - Carbon-emission policy evaluation and sensitivity analysis
 - Reproducible reporting workflows for policy briefs, research papers, and stakeholder workshops
+
+## Contact
+
+Xujiarui  
+College of Transportation, Tongji University  
+2410824@tongji.edu.cn
 
 ## Public Preview
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CN Carbon Emission Policy Simulation Model</title>
+  <title>China Vehicle Carbon Emission Policy Simulation Platform</title>
   <meta name="description" content="A China-focused vehicle carbon-emission policy simulation project with a browser-based workflow for scenario setup, model execution, and results review.">
   <style>
     :root {
@@ -389,6 +389,104 @@
 
     .audience li { margin: 7px 0; }
 
+    .scope-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .scope-item {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+      min-height: 190px;
+    }
+
+    .scope-item span {
+      display: inline-flex;
+      min-height: 24px;
+      align-items: center;
+      padding: 0 8px;
+      border-radius: 5px;
+      background: #edf4f1;
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .showcase {
+      display: grid;
+      grid-template-columns: minmax(0, 0.62fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .output-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .output-metric {
+      min-height: 120px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+
+    .output-metric strong {
+      display: block;
+      font-size: 30px;
+      line-height: 1.05;
+      margin: 12px 0 6px;
+    }
+
+    .output-metric span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .output-chart {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      min-height: 330px;
+    }
+
+    .output-chart svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .legend i {
+      display: inline-block;
+      width: 16px;
+      height: 3px;
+      vertical-align: middle;
+      margin-right: 6px;
+      border-radius: 2px;
+    }
+
+    .data-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
     .card {
       min-height: 198px;
       background: var(--panel);
@@ -661,6 +759,9 @@
       .preview-side { border-right: 0; border-bottom: 1px solid var(--line); }
       .cards,
       .audiences,
+      .scope-grid,
+      .showcase,
+      .data-grid,
       .workflow,
       .facts {
         grid-template-columns: 1fr;
@@ -674,6 +775,7 @@
       h1 { font-size: 42px; }
       section { padding: 52px 0; }
       .metric-row,
+      .output-metrics,
       .files {
         grid-template-columns: 1fr;
       }
@@ -692,13 +794,14 @@
 <body>
   <header>
     <div class="shell nav">
-      <a class="brand" href="#top" aria-label="CN Carbon Emission Policy Simulation Model home">
+      <a class="brand" href="#top" aria-label="China Vehicle Carbon Emission Policy Simulation Platform home">
         <span class="mark">CN</span>
-        <span>CN OMEGA</span>
+        <span>CN Carbon Policy</span>
       </a>
       <nav aria-label="Page navigation">
         <a href="#value">Highlights</a>
         <a href="#collaboration">Collaboration</a>
+        <a href="#scope">Scope</a>
         <a href="#workflow">Workflow</a>
         <a href="#demo">Demo</a>
         <a href="#deploy">Access</a>
@@ -713,7 +816,7 @@
       <div class="shell hero-grid">
         <div>
           <p class="eyebrow">China-localized Policy Simulation - Vehicle Carbon Emissions</p>
-          <h1>China Vehicle Carbon Policy Simulation Platform</h1>
+          <h1>China Vehicle Carbon Emission Policy Simulation Platform</h1>
           <p class="hero-copy">A browser-based research workflow for configuring policy scenarios, running vehicle carbon-emission simulations, reviewing summary indicators, and preparing reproducible outputs for policy analysis.</p>
           <div class="hero-actions">
             <a class="button" href="#start">View Project Status</a>
@@ -721,12 +824,12 @@
           </div>
           <div class="facts" aria-label="Project summary">
             <div class="fact"><strong>Web</strong><span>Browser-based interface</span></div>
-            <div class="fact"><strong>OMEGA</strong><span>Model-driven simulation</span></div>
+            <div class="fact"><strong>Model</strong><span>Simulation-driven analysis</span></div>
             <div class="fact"><strong>CSV</strong><span>Policy inputs and outputs</span></div>
           </div>
         </div>
 
-        <div class="preview" aria-label="CN Carbon Emission Policy Simulation interface preview">
+        <div class="preview" aria-label="China vehicle carbon emission policy simulation interface preview">
           <div class="preview-bar">
             <span class="dot"></span>
             <span class="dot"></span>
@@ -831,11 +934,45 @@
       </div>
     </section>
 
+    <section id="scope">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">03 - Model Scope</p>
+            <h2>Scenario coverage across policy, market, technology, and compliance dimensions</h2>
+          </div>
+          <p class="section-copy">The model workflow is designed around structured vehicle, market, technology-cost, policy-standard, credit, and energy input tables. This makes it suitable for scenario comparison rather than one-off static reporting.</p>
+        </div>
+        <div class="scope-grid">
+          <article class="scope-item">
+            <span>Policy</span>
+            <h3>Regulatory pathways</h3>
+            <p>Carbon standards, credit parameters, new-energy vehicle requirements, upstream methods, utility factors, and required sales-share assumptions.</p>
+          </article>
+          <article class="scope-item">
+            <span>Market</span>
+            <h3>Fleet and sales dynamics</h3>
+            <p>Vehicle classes, body styles, manufacturer portfolios, sales-share behavior, price response, annual travel, and fleet turnover inputs.</p>
+          </article>
+          <article class="scope-item">
+            <span>Technology</span>
+            <h3>Powertrain and cost pathways</h3>
+            <p>ICE, BEV, and PHEV cost curves, battery demand, mass scaling, glider cost, production constraints, fuel prices, and electricity-price inputs.</p>
+          </article>
+          <article class="scope-item">
+            <span>Outputs</span>
+            <h3>Decision-ready results</h3>
+            <p>Sales, market shares, certification emissions, target comparison, battery demand, vehicle cost, credit settlement, logs, and downloadable output packages.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section id="workflow">
       <div class="shell">
         <div class="section-head">
           <div>
-            <p class="section-kicker">03 - Workflow</p>
+            <p class="section-kicker">04 - Workflow</p>
             <h2>A complete path from policy assumptions to simulation outputs</h2>
           </div>
           <p class="section-copy">The workflow separates user interaction from model execution. This keeps the research model traceable while creating a practical path toward shared server deployment.</p>
@@ -869,7 +1006,7 @@
       <div class="shell">
         <div class="section-head">
           <div>
-            <p class="section-kicker">04 - Demo</p>
+            <p class="section-kicker">05 - Demo</p>
             <h2>Local web-app demonstration coming soon</h2>
           </div>
           <p class="section-copy">A recorded demonstration will show the local web app opening in the browser, receiving policy inputs, running a scenario, and displaying logs, summary metrics, and output files.</p>
@@ -877,11 +1014,11 @@
         <div class="demo-frame">
           <div class="demo-media">
             <video controls poster="" preload="metadata" onloadedmetadata="this.closest('.demo-media').classList.add('has-video')">
-              <source src="assets/cn-omega-demo.mp4" type="video/mp4">
+              <source src="assets/cn-emission-demo.mp4" type="video/mp4">
             </video>
             <div class="demo-placeholder">
               <strong>Demo video placeholder</strong>
-              <span>Demo recording will be added as docs/assets/cn-omega-demo.mp4</span>
+              <span>Demo recording will be added as docs/assets/cn-emission-demo.mp4</span>
             </div>
           </div>
           <div class="demo-notes">
@@ -901,7 +1038,7 @@
       <div class="shell">
         <div class="section-head">
           <div>
-            <p class="section-kicker">05 - Deployment</p>
+            <p class="section-kicker">06 - Deployment</p>
             <h2>Designed for local research use and future server access</h2>
           </div>
           <p class="section-copy">The public project page can be hosted on GitHub Pages. The full simulation workflow requires a Python backend and can later be deployed on a controlled cloud server for authenticated access.</p>
@@ -928,8 +1065,8 @@ python web_app.py
 http://127.0.0.1:8765
 
 <span># server / LAN</span>
-$env:OMEGA_WEB_HOST="0.0.0.0"
-$env:OMEGA_WEB_PORT="8765"
+$env:APP_WEB_HOST="0.0.0.0"
+$env:APP_WEB_PORT="8765"
 python web_app.py</pre>
         </div>
       </div>
@@ -939,30 +1076,69 @@ python web_app.py</pre>
       <div class="shell">
         <div class="section-head">
           <div>
-            <p class="section-kicker">06 - Outputs</p>
-            <h2>Outputs are organized for review, download, and audit</h2>
+            <p class="section-kicker">07 - Example Outputs</p>
+            <h2>Example scenario outputs are summarized without exposing raw model files</h2>
           </div>
-          <p class="section-copy">Each run is structured around saved inputs, status records, logs, summary data, and raw output files, supporting reproducibility and follow-up analysis.</p>
+          <p class="section-copy">The sample below uses aggregated market-level outputs from a demonstration run. It illustrates how the platform can communicate sales scale, electrification, battery demand, and emissions outcomes without publishing proprietary model internals.</p>
         </div>
-        <div class="results-grid">
-          <div class="panel">
-            <h3>Example Trend Indicators</h3>
-            <div class="bars" aria-label="Example indicator bar chart">
-              <div class="bar"><span style="width: 74%"></span></div>
-              <div class="bar"><span style="width: 58%"></span></div>
-              <div class="bar"><span style="width: 86%"></span></div>
+        <div class="showcase">
+          <div class="output-metrics">
+            <div class="output-metric"><span>2031 simulated sales</span><strong>36.6M</strong><span>new vehicles</span></div>
+            <div class="output-metric"><span>2031 BEV + PHEV share</span><strong>57.0%</strong><span>market-level share</span></div>
+            <div class="output-metric"><span>2026-2031 certified emissions</span><strong>-23.6%</strong><span>aggregate scenario change</span></div>
+            <div class="output-metric"><span>2031 battery demand</span><strong>1,383</strong><span>GWh</span></div>
+          </div>
+          <div class="output-chart">
+            <h3>Market-Level Demonstration Trend</h3>
+            <svg viewBox="0 0 640 300" role="img" aria-label="Aggregated demonstration trend chart">
+              <rect x="0" y="0" width="640" height="300" fill="#fff"/>
+              <line x1="54" y1="236" x2="604" y2="236" stroke="#d8e0e5"/>
+              <line x1="54" y1="182" x2="604" y2="182" stroke="#d8e0e5"/>
+              <line x1="54" y1="128" x2="604" y2="128" stroke="#d8e0e5"/>
+              <line x1="54" y1="74" x2="604" y2="74" stroke="#d8e0e5"/>
+              <line x1="54" y1="32" x2="54" y2="236" stroke="#8fa1ad"/>
+              <line x1="54" y1="236" x2="604" y2="236" stroke="#8fa1ad"/>
+              <polyline points="54,164 164,152 274,138 384,122 494,107 604,96" fill="none" stroke="#22577a" stroke-width="4"/>
+              <polyline points="54,62 164,68 274,102 384,113 494,130 604,166" fill="none" stroke="#2f7d64" stroke-width="4"/>
+              <polyline points="54,207 164,200 274,179 384,171 494,176 604,146" fill="none" stroke="#a06a21" stroke-width="4"/>
+              <g fill="#5e6874" font-size="12" font-family="Segoe UI, Arial, sans-serif">
+                <text x="44" y="258">2026</text><text x="154" y="258">2027</text><text x="264" y="258">2028</text>
+                <text x="374" y="258">2029</text><text x="484" y="258">2030</text><text x="594" y="258">2031</text>
+                <text x="18" y="42">High</text><text x="18" y="238">Low</text>
+              </g>
+            </svg>
+            <div class="legend">
+              <span><i style="background:#22577a"></i>Sales</span>
+              <span><i style="background:#2f7d64"></i>Certified emissions</span>
+              <span><i style="background:#a06a21"></i>Battery demand</span>
             </div>
           </div>
-          <div class="panel">
-            <h3>Run Directory Structure</h3>
-            <table class="stat-table">
-              <tr><th>request.json</th><td>Inputs</td></tr>
-              <tr><th>status.json</th><td>Status</td></tr>
-              <tr><th>run.log</th><td>Logs</td></tr>
-              <tr><th>summary.json</th><td>Summary</td></tr>
-              <tr><th>outputs/</th><td>Raw outputs</td></tr>
-            </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="data">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">08 - Data and Traceability</p>
+            <h2>Structured inputs and run records support review and collaboration</h2>
           </div>
+          <p class="section-copy">The workflow records input metadata, file versions, checksums, request parameters, run status, logs, summary outputs, and detailed output packages. This is useful for validating assumptions and comparing policy cases across teams.</p>
+        </div>
+        <div class="data-grid">
+          <article class="card">
+            <h3>Input registry</h3>
+            <p>Policy, market, technology, vehicle, energy, and cost inputs are organized as versioned tabular files with metadata and checksums.</p>
+          </article>
+          <article class="card">
+            <h3>Run traceability</h3>
+            <p>Each scenario can preserve request parameters, status records, logs, summary files, and output folders for later audit.</p>
+          </article>
+          <article class="card">
+            <h3>Comparative analysis</h3>
+            <p>Baseline, strict, and customized policy cases can be compared through consistent indicators and downloadable result packages.</p>
+          </article>
         </div>
       </div>
     </section>
@@ -971,9 +1147,10 @@ python web_app.py</pre>
       <div class="shell">
         <div class="cta">
           <div>
-            <p class="section-kicker">07 - Start</p>
+            <p class="section-kicker">09 - Contact</p>
             <h2>Public preview now, full model release later</h2>
             <p>This public repository presents the project and demonstration interface. The complete local execution package and core model are planned for a later release or controlled deployment.</p>
+            <p>Contact: Xujiarui, College of Transportation, Tongji University - 2410824@tongji.edu.cn</p>
           </div>
           <a class="button secondary" href="#deploy">View Access Plan</a>
         </div>
@@ -982,7 +1159,7 @@ python web_app.py</pre>
   </main>
 
   <footer>
-    <div class="shell">CN Carbon Emission Policy Simulation Model - Public project page for GitHub Pages</div>
+    <div class="shell">China Vehicle Carbon Emission Policy Simulation Platform - Public project page for GitHub Pages</div>
   </footer>
 </body>
 </html>

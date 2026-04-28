@@ -11,16 +11,10 @@ env/
 
 # Local web app runtime outputs
 web_runs/
+Final_*/
 web_server.log
 web_server.err.log
 *.log
-
-# Private model and local runner code.
-# Keep these out of the public GitHub Pages repository for now.
-omega_model/
-web_app.py
-omega_web_runner.py
-WEB_APP_README.md
 
 # Local editor and OS files
 .vscode/
