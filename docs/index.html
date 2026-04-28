@@ -218,6 +218,12 @@
       margin-bottom: 12px;
     }
 
+    .mini-note {
+      color: var(--muted);
+      font-size: 11px;
+      margin: -4px 0 12px;
+    }
+
     .field {
       height: 34px;
       border: 1px solid #cbd4dc;
@@ -274,32 +280,14 @@
       margin-top: 12px;
       border: 1px solid var(--line);
       border-radius: 7px;
-      background:
-        linear-gradient(#eef2f5 1px, transparent 1px) 0 0 / 100% 25%,
-        linear-gradient(90deg, #eef2f5 1px, transparent 1px) 0 0 / 12.5% 100%,
-        #fff;
-      position: relative;
+      background: #fff;
       overflow: hidden;
     }
 
-    .chart::before,
-    .chart::after {
-      content: "";
-      position: absolute;
-      inset: 32px 22px 36px;
-      border-radius: 46% 54% 40% 60%;
-      border: 4px solid transparent;
-      border-top-color: var(--teal);
-      border-right-color: var(--teal);
-      transform: rotate(-7deg);
-    }
-
-    .chart::after {
-      inset: 58px 22px 42px;
-      border-top-color: var(--amber);
-      border-right-color: var(--amber);
-      transform: rotate(8deg);
-      opacity: 0.88;
+    .chart svg {
+      width: 100%;
+      height: 100%;
+      display: block;
     }
 
     .files {
@@ -838,6 +826,7 @@
           <div class="preview-body">
             <div class="preview-side">
               <div class="mini-title">Scenario Inputs</div>
+              <div class="mini-note">Example model coverage and cost signals</div>
               <div class="field"></div>
               <div class="field"></div>
               <div class="field"></div>
@@ -846,12 +835,42 @@
             </div>
             <div class="preview-main">
               <div class="metric-row">
-                <div class="metric"><span>Final-Year Sales</span><strong>24.8</strong></div>
-                <div class="metric"><span>Battery Demand</span><strong>812</strong></div>
-                <div class="metric"><span>Certified Emissions</span><strong>31.6</strong></div>
-                <div class="metric"><span>Average Cost</span><strong>18.4k</strong></div>
+                <div class="metric"><span>Manufacturers</span><strong>20</strong></div>
+                <div class="metric"><span>Vehicle Records</span><strong>15.3k</strong></div>
+                <div class="metric"><span>2031 Avg. Cost</span><strong>44.0k</strong></div>
+                <div class="metric"><span>NEV Credits for CAFC</span><strong>4,923</strong></div>
               </div>
-              <div class="chart"></div>
+              <div class="chart" aria-label="Example cost signal chart">
+                <svg viewBox="0 0 520 214" role="img" aria-label="Example cost signal chart">
+                  <rect width="520" height="214" fill="#fff"/>
+                  <g stroke="#eef2f5" stroke-width="1">
+                    <line x1="48" y1="26" x2="492" y2="26"/><line x1="48" y1="70" x2="492" y2="70"/>
+                    <line x1="48" y1="114" x2="492" y2="114"/><line x1="48" y1="158" x2="492" y2="158"/>
+                    <line x1="48" y1="26" x2="48" y2="176"/><line x1="137" y1="26" x2="137" y2="176"/>
+                    <line x1="226" y1="26" x2="226" y2="176"/><line x1="315" y1="26" x2="315" y2="176"/>
+                    <line x1="404" y1="26" x2="404" y2="176"/><line x1="492" y1="26" x2="492" y2="176"/>
+                  </g>
+                  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="48,56 137,91 226,100 315,118 404,142 492,133" stroke="#22577a" stroke-width="4"/>
+                    <polyline points="48,154 137,146 226,127 315,108 404,94 492,74" stroke="#a06a21" stroke-width="4"/>
+                  </g>
+                  <g fill="#fff" stroke-width="3">
+                    <circle cx="48" cy="56" r="5" stroke="#22577a"/><circle cx="137" cy="91" r="5" stroke="#22577a"/>
+                    <circle cx="226" cy="100" r="5" stroke="#22577a"/><circle cx="315" cy="118" r="5" stroke="#22577a"/>
+                    <circle cx="404" cy="142" r="5" stroke="#22577a"/><circle cx="492" cy="133" r="5" stroke="#22577a"/>
+                    <circle cx="48" cy="154" r="5" stroke="#a06a21"/><circle cx="137" cy="146" r="5" stroke="#a06a21"/>
+                    <circle cx="226" cy="127" r="5" stroke="#a06a21"/><circle cx="315" cy="108" r="5" stroke="#a06a21"/>
+                    <circle cx="404" cy="94" r="5" stroke="#a06a21"/><circle cx="492" cy="74" r="5" stroke="#a06a21"/>
+                  </g>
+                  <g font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#5d6978">
+                    <text x="40" y="196">2026</text><text x="129" y="196">2027</text><text x="218" y="196">2028</text>
+                    <text x="307" y="196">2029</text><text x="396" y="196">2030</text><text x="484" y="196">2031</text>
+                    <text x="58" y="20">Example cost and scale signals</text>
+                    <text x="314" y="66">total vehicle cost scale</text>
+                    <text x="314" y="132">average vehicle cost</text>
+                  </g>
+                </svg>
+              </div>
               <div class="files">
                 <div class="file">summary_results.csv</div>
                 <div class="file">manufacturer_annual_data.csv</div>
