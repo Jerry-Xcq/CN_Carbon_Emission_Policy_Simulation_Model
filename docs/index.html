@@ -103,6 +103,20 @@
       border-color: #b8c8d4;
     }
 
+    .lang-toggle {
+      min-height: 36px;
+      padding: 0 12px;
+      border-radius: 6px;
+      border: 1px solid #b8c8d4;
+      background: #fff;
+      color: var(--navy);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
     .hero {
       min-height: calc(100vh - 66px);
       display: grid;
@@ -805,6 +819,7 @@
         <a href="#deploy">Access</a>
         <a href="#results">Outputs</a>
         <a class="button" href="#start">Project Status</a>
+        <button class="lang-toggle" id="langToggle" type="button">中文</button>
       </nav>
     </div>
   </header>
@@ -1179,7 +1194,7 @@ python web_app.py</pre>
             <p class="section-kicker">09 - Contact</p>
             <h2>Public preview now, full model release later</h2>
             <p>This public repository presents the project and demonstration interface. The complete local execution package and core model are planned for a later release or controlled deployment.</p>
-            <p>Contact: Xujiarui, College of Transportation, Tongji University - 2410824@tongji.edu.cn</p>
+            <p>Contact: Xu Jiarui; Liu Haobing | College of Transportation, Tongji University | Email: 2410824@tongji.edu.cn</p>
           </div>
           <a class="button secondary" href="#deploy">View Access Plan</a>
         </div>
@@ -1190,5 +1205,155 @@ python web_app.py</pre>
   <footer>
     <div class="shell">China Vehicle Carbon Emission Policy Simulation Platform - Public project page for GitHub Pages</div>
   </footer>
+  <script>
+    const pageTranslations = {
+      "China Vehicle Carbon Emission Policy Simulation Platform": "中国汽车碳排放政策推演平台",
+      "CN Carbon Policy": "中国汽车碳政策",
+      "Highlights": "项目亮点",
+      "Collaboration": "合作方向",
+      "Scope": "模型范围",
+      "Workflow": "工作流程",
+      "Demo": "演示",
+      "Access": "访问方式",
+      "Outputs": "输出结果",
+      "Project Status": "项目状态",
+      "China-localized Policy Simulation - Vehicle Carbon Emissions": "面向中国情景的汽车碳排放政策推演",
+      "A browser-based research workflow for configuring policy scenarios, running vehicle carbon-emission simulations, reviewing summary indicators, and preparing reproducible outputs for policy analysis.": "一个基于浏览器的研究工作流，用于配置政策情景、运行汽车碳排放推演、查看汇总指标，并生成可复现的政策分析输出。",
+      "View Project Status": "查看项目状态",
+      "Explore Workflow": "查看工作流程",
+      "Web": "网页",
+      "Browser-based interface": "基于浏览器的界面",
+      "Model": "模型",
+      "Simulation-driven analysis": "推演驱动分析",
+      "CSV": "CSV",
+      "Policy inputs and outputs": "政策输入与结果输出",
+      "Scenario Inputs": "情景输入",
+      "Example model coverage and cost signals": "示例模型覆盖范围与成本信号",
+      "Run Scenario": "运行情景",
+      "OEMs": "车企",
+      "Vehicle Records": "车辆记录",
+      "2031 Avg. Cost": "2031年平均成本",
+      "NEV Credits": "新能源积分",
+      "for CAFC": "用于CAFC抵偿",
+      "Example cost signals": "示例成本信号",
+      "total cost scale": "总成本规模",
+      "average cost": "平均成本",
+      "01 - What It Solves": "01 - 解决的问题",
+      "Turning model capability into an operational policy analysis interface": "将模型能力转化为可操作的政策分析界面",
+      "The project translates a technical simulation workflow into an interface that supports scenario design, repeatable runs, and results communication for carbon-emission policy analysis.": "该项目将技术型推演流程转化为可交互界面，支持情景设计、可重复运行和碳排放政策分析结果展示。",
+      "Scenario Configuration": "情景配置",
+      "Configure analysis years, market assumptions, technology parameters, production constraints, and policy input files through a structured web interface.": "通过结构化网页界面配置分析年份、市场假设、技术参数、生产约束和政策输入文件。",
+      "Reproducible Execution": "可复现运行",
+      "Each scenario is designed to run as an isolated job with its own request record, status file, log, and output directory.": "每个情景作为独立任务运行，保留请求记录、状态文件、日志和输出目录。",
+      "Results Delivery": "结果交付",
+      "Summary indicators, time-series data, logs, and raw output files are organized for review, comparison, and downstream analysis.": "汇总指标、时间序列数据、日志和原始输出文件被组织用于查看、比较和后续分析。",
+      "02 - Collaboration Value": "02 - 合作价值",
+      "Built for policy evaluation, corporate planning, and data-driven research": "面向政策评估、企业规划和数据驱动研究",
+      "The project is positioned as a bridge between regulatory policy analysis and industry decision support. It can support collaborative studies with automakers, automotive data providers, research institutes, and policy teams.": "该项目定位于连接监管政策分析与行业决策支持，可服务于车企、汽车数据机构、研究机构和政策团队的合作研究。",
+      "Automakers": "车企",
+      "Scenario planning for compliance and technology pathways": "面向合规与技术路线的情景规划",
+      "Evaluate carbon-policy pressure under alternative regulatory assumptions.": "评估不同监管假设下的碳政策压力。",
+      "Compare fleet electrification, cost, and sales-share pathways.": "比较车队电动化、成本和销售结构路径。",
+      "Prepare internal policy response and product strategy analysis.": "支持企业内部政策响应和产品战略分析。",
+      "Data and Analytics Institutions": "数据与分析机构",
+      "Model-ready data workflows for vehicle-market research": "面向汽车市场研究的模型化数据工作流",
+      "Connect market, fleet, price, technology, and policy datasets.": "连接市场、车队、价格、技术和政策数据集。",
+      "Turn data assets into repeatable policy-simulation scenarios.": "将数据资产转化为可重复的政策推演情景。",
+      "Generate structured outputs for dashboards, reports, and studies.": "为仪表盘、报告和研究生成结构化输出。",
+      "Research and Policy Teams": "研究与政策团队",
+      "Transparent assumptions and reproducible simulation outputs": "透明假设与可复现推演输出",
+      "Track assumptions, input files, logs, and output packages by run.": "按运行记录追踪假设、输入文件、日志和输出包。",
+      "Compare baseline, strict, and customized policy cases.": "比较基准、严格和自定义政策情景。",
+      "Support academic papers, policy briefs, and stakeholder workshops.": "支持学术论文、政策简报和利益相关方研讨。",
+      "03 - Model Scope": "03 - 模型范围",
+      "Scenario coverage across policy, market, technology, and compliance dimensions": "覆盖政策、市场、技术和合规维度的情景分析",
+      "The model workflow is designed around structured vehicle, market, technology-cost, policy-standard, credit, and energy input tables. This makes it suitable for scenario comparison rather than one-off static reporting.": "模型工作流围绕车辆、市场、技术成本、政策标准、积分和能源等结构化输入表设计，适合开展情景比较，而不只是一次性静态报告。",
+      "Policy": "政策",
+      "Regulatory pathways": "监管路径",
+      "Market": "市场",
+      "Fleet and sales dynamics": "车队与销售动态",
+      "Technology": "技术",
+      "Powertrain and cost pathways": "动力系统与成本路径",
+      "Decision-ready results": "面向决策的结果",
+      "04 - Workflow": "04 - 工作流程",
+      "A complete path from policy assumptions to simulation outputs": "从政策假设到推演结果的完整路径",
+      "The workflow separates user interaction from model execution. This keeps the research model traceable while creating a practical path toward shared server deployment.": "工作流将用户交互与模型执行分离，在保持研究模型可追踪的同时，为共享服务器部署提供可行路径。",
+      "Input": "输入",
+      "Define Policy Scenarios": "定义政策情景",
+      "Run": "运行",
+      "Launch Model Runs": "启动模型运行",
+      "Parse": "解析",
+      "Extract Summary Metrics": "提取汇总指标",
+      "Deliver": "交付",
+      "Deliver Results": "交付结果",
+      "05 - Demo": "05 - 演示",
+      "Local web-app demonstration": "本地网页应用演示",
+      "The recorded demonstration shows the local browser interface, scenario setup, model execution, live run status, summary charts, generated figures, and downloadable output files.": "录屏演示展示了本地浏览器界面、情景设置、模型运行、实时状态、汇总图表、生成图片和可下载输出文件。",
+      "Demo video": "演示视频",
+      "Use the video controls to play the local workflow recording": "使用视频控件播放本地工作流录屏",
+      "Demo Flow": "演示流程",
+      "Start the local web app and open it in a browser.": "启动本地网页应用并在浏览器中打开。",
+      "Set scenario parameters or upload policy CSV files.": "设置情景参数或上传政策 CSV 文件。",
+      "Run the scenario and show live status and logs.": "运行情景并展示实时状态和日志。",
+      "Review summary cards, trend views, generated figures, and downloadable outputs.": "查看汇总卡片、趋势图、生成图片和可下载结果。",
+      "06 - Deployment": "06 - 部署",
+      "Designed for local research use and future server access": "面向本地研究使用与未来服务器访问",
+      "Local Research Mode": "本地研究模式",
+      "Team Network Mode": "团队局域网模式",
+      "Cloud Server Mode": "云服务器模式",
+      "07 - Example Outputs": "07 - 示例输出",
+      "Example scenario outputs are summarized without exposing raw model files": "展示示例情景结果，不公开核心模型文件",
+      "08 - Data and Traceability": "08 - 数据与可追踪性",
+      "Structured inputs and run records support review and collaboration": "结构化输入与运行记录支持审查和合作",
+      "Input registry": "输入登记",
+      "Run traceability": "运行可追踪",
+      "Comparative analysis": "对比分析",
+      "09 - Contact": "09 - 联系方式",
+      "Public preview now, full model release later": "当前为公开预览，完整模型后续发布",
+      "This public repository presents the project and demonstration interface. The complete local execution package and core model are planned for a later release or controlled deployment.": "该公开仓库展示项目和演示界面。完整本地运行包和核心模型计划后续发布或以受控部署方式提供。",
+      "Contact: Xu Jiarui; Liu Haobing | College of Transportation, Tongji University | Email: 2410824@tongji.edu.cn": "Contact: Xu Jiarui; Liu Haobing | 同济大学交通学院 | Email: 2410824@tongji.edu.cn",
+      "View Access Plan": "查看访问方案",
+      "China Vehicle Carbon Emission Policy Simulation Platform - Public project page for GitHub Pages": "中国汽车碳排放政策推演平台 - GitHub Pages 公开展示页"
+    };
+
+    const originalTextNodes = new WeakMap();
+
+    function replaceTextPreservingSpace(raw, translated) {
+      const leading = raw.match(/^\s*/)[0];
+      const trailing = raw.match(/\s*$/)[0];
+      return `${leading}${translated}${trailing}`;
+    }
+
+    function translateStaticPage(lang) {
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+        acceptNode(node) {
+          const parent = node.parentElement;
+          if (!parent || ["SCRIPT", "STYLE"].includes(parent.tagName)) return NodeFilter.FILTER_REJECT;
+          return node.nodeValue.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+        }
+      });
+      const nodes = [];
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+      nodes.forEach(node => {
+        if (!originalTextNodes.has(node)) originalTextNodes.set(node, node.nodeValue);
+        const original = originalTextNodes.get(node);
+        const key = original.trim();
+        node.nodeValue = lang === "zh" && pageTranslations[key]
+          ? replaceTextPreservingSpace(original, pageTranslations[key])
+          : original;
+      });
+      document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+      document.title = lang === "zh" ? pageTranslations["China Vehicle Carbon Emission Policy Simulation Platform"] : "China Vehicle Carbon Emission Policy Simulation Platform";
+      document.getElementById("langToggle").textContent = lang === "zh" ? "English" : "中文";
+    }
+
+    let currentLang = localStorage.getItem("cnCarbonLang") || "en";
+    document.getElementById("langToggle").addEventListener("click", () => {
+      currentLang = currentLang === "zh" ? "en" : "zh";
+      localStorage.setItem("cnCarbonLang", currentLang);
+      translateStaticPage(currentLang);
+    });
+    translateStaticPage(currentLang);
+  </script>
 </body>
 </html>

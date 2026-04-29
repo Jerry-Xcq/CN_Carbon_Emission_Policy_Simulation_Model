@@ -22,9 +22,9 @@ The project is designed to support:
 
 ## Contact
 
-Xujiarui  
+Xu Jiarui; Liu Haobing  
 College of Transportation, Tongji University  
-2410824@tongji.edu.cn
+Email: 2410824@tongji.edu.cn
 
 ## Public Preview
 

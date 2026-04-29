@@ -2,17 +2,23 @@
 
 This directory contains the public GitHub Pages site for the China Vehicle Carbon Emission Policy Simulation Platform.
 
-The page is designed as a public-facing introduction to the project: it explains the simulation workflow, shows the browser-based interface concept, and reserves space for a recorded local web-app demonstration.
+The page is designed as a public-facing introduction to the project: it explains the simulation workflow, shows the browser-based interface concept, and includes a recorded local web-app demonstration.
 
 ## Demo Video
 
-The homepage includes a reserved video section for a future screen recording. When the demo is ready, place the file at:
+The homepage includes a video section. The demo video is expected at:
 
 ```text
 docs/assets/cn-emission-demo.mp4
 ```
 
-The page will automatically show the video in the demo section.
+The page automatically shows the video in the demo section.
+
+## Contact
+
+Xu Jiarui; Liu Haobing  
+College of Transportation, Tongji University  
+Email: 2410824@tongji.edu.cn
 
 ## Publishing
 
