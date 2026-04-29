@@ -751,6 +751,8 @@
       max-width: 680px;
     }
 
+    .contact-email { white-space: nowrap; }
+
     footer {
       padding: 30px 0 42px;
       color: var(--muted);
@@ -1121,9 +1123,9 @@ python web_app.py</pre>
         <div class="section-head">
           <div>
             <p class="section-kicker">07 - Example Outputs</p>
-            <h2>Example scenario outputs are summarized without exposing raw model files</h2>
+            <h2>Example scenario outputs for policy interpretation</h2>
           </div>
-          <p class="section-copy">The sample below uses aggregated market-level outputs from a demonstration run. It illustrates how the platform can communicate sales scale, electrification, battery demand, and emissions outcomes without publishing proprietary model internals.</p>
+          <p class="section-copy">The sample below uses aggregated market-level outputs from a demonstration run. It illustrates how the platform can communicate sales scale, electrification, battery demand, and emissions outcomes for policy interpretation.</p>
         </div>
         <div class="showcase">
           <div class="output-metrics">
@@ -1194,7 +1196,7 @@ python web_app.py</pre>
             <p class="section-kicker">09 - Contact</p>
             <h2>Public preview now, full model release later</h2>
             <p>This public repository presents the project and demonstration interface. The complete local execution package and core model are planned for a later release or controlled deployment.</p>
-            <p>Contact: Xu Jiarui; Liu Haobing | College of Transportation, Tongji University | Email: 2410824@tongji.edu.cn</p>
+            <p>Contact: Xu Jiarui; Liu Haobing | College of Transportation, Tongji University | <span class="contact-email">Email: 2410824@tongji.edu.cn</span></p>
           </div>
           <a class="button secondary" href="#deploy">View Access Plan</a>
         </div>
@@ -1208,6 +1210,7 @@ python web_app.py</pre>
   <script>
     const pageTranslations = {
       "China Vehicle Carbon Emission Policy Simulation Platform": "中国汽车碳排放政策推演平台",
+      "CN": "中",
       "CN Carbon Policy": "中国汽车碳政策",
       "Highlights": "项目亮点",
       "Collaboration": "合作方向",
@@ -1225,7 +1228,7 @@ python web_app.py</pre>
       "Browser-based interface": "基于浏览器的界面",
       "Model": "模型",
       "Simulation-driven analysis": "推演驱动分析",
-      "CSV": "CSV",
+      "CSV": "表格",
       "Policy inputs and outputs": "政策输入与结果输出",
       "Scenario Inputs": "情景输入",
       "Example model coverage and cost signals": "示例模型覆盖范围与成本信号",
@@ -1233,11 +1236,17 @@ python web_app.py</pre>
       "OEMs": "车企",
       "Vehicle Records": "车辆记录",
       "2031 Avg. Cost": "2031年平均成本",
+      "15.3k": "1.53万",
+      "44.0k": "4.40万",
       "NEV Credits": "新能源积分",
-      "for CAFC": "用于CAFC抵偿",
+      "for CAFC": "用于油耗积分抵偿",
       "Example cost signals": "示例成本信号",
       "total cost scale": "总成本规模",
       "average cost": "平均成本",
+      "summary_results.csv": "汇总结果表",
+      "manufacturer_annual_data.csv": "车企年度数据表",
+      "vehicle_annual_data.csv": "车辆年度数据表",
+      "run.log": "运行日志",
       "01 - What It Solves": "01 - 解决的问题",
       "Turning model capability into an operational policy analysis interface": "将模型能力转化为可操作的政策分析界面",
       "The project translates a technical simulation workflow into an interface that supports scenario design, repeatable runs, and results communication for carbon-emission policy analysis.": "该项目将技术型推演流程转化为可交互界面，支持情景设计、可重复运行和碳排放政策分析结果展示。",
@@ -1270,22 +1279,30 @@ python web_app.py</pre>
       "The model workflow is designed around structured vehicle, market, technology-cost, policy-standard, credit, and energy input tables. This makes it suitable for scenario comparison rather than one-off static reporting.": "模型工作流围绕车辆、市场、技术成本、政策标准、积分和能源等结构化输入表设计，适合开展情景比较，而不只是一次性静态报告。",
       "Policy": "政策",
       "Regulatory pathways": "监管路径",
+      "Carbon standards, credit parameters, new-energy vehicle requirements, upstream methods, utility factors, and required sales-share assumptions.": "覆盖碳排放标准、积分参数、新能源汽车积分要求、上游排放方法、效用因子和必要销售占比假设。",
       "Market": "市场",
       "Fleet and sales dynamics": "车队与销售动态",
+      "Vehicle classes, body styles, manufacturer portfolios, sales-share behavior, price response, annual travel, and fleet turnover inputs.": "覆盖车辆级别、车身形式、车企产品组合、销售占比行为、价格响应、年度行驶里程和车队周转输入。",
       "Technology": "技术",
       "Powertrain and cost pathways": "动力系统与成本路径",
+      "ICE, BEV, and PHEV cost curves, battery demand, mass scaling, glider cost, production constraints, fuel prices, and electricity-price inputs.": "覆盖燃油车、纯电动车和插电混动车成本曲线、电池需求、质量缩放、白车身成本、生产约束、燃料价格和电价输入。",
       "Decision-ready results": "面向决策的结果",
+      "Sales, market shares, certification emissions, target comparison, battery demand, vehicle cost, credit settlement, logs, and downloadable output packages.": "输出销量、市场份额、认证碳排放、目标对比、电池需求、车辆成本、积分结算、日志和可下载结果包。",
       "04 - Workflow": "04 - 工作流程",
       "A complete path from policy assumptions to simulation outputs": "从政策假设到推演结果的完整路径",
       "The workflow separates user interaction from model execution. This keeps the research model traceable while creating a practical path toward shared server deployment.": "工作流将用户交互与模型执行分离，在保持研究模型可追踪的同时，为共享服务器部署提供可行路径。",
       "Input": "输入",
       "Define Policy Scenarios": "定义政策情景",
+      "Select baseline inputs or upload CSV files, then set policy, market, and technology assumptions.": "选择基准输入或上传表格文件，并设置政策、市场和技术假设。",
       "Run": "运行",
       "Launch Model Runs": "启动模型运行",
+      "Create a run directory, persist request parameters, and execute the simulation through a controlled runner.": "创建运行目录，保存请求参数，并通过受控运行器执行推演。",
       "Parse": "解析",
       "Extract Summary Metrics": "提取汇总指标",
+      "Parse summary outputs into key metrics, trend series, and a navigable file index.": "将汇总输出解析为关键指标、趋势序列和可浏览文件索引。",
       "Deliver": "交付",
       "Deliver Results": "交付结果",
+      "Review run status, logs, charts, and downloadable output files from the browser.": "在浏览器中查看运行状态、日志、图表和可下载输出文件。",
       "05 - Demo": "05 - 演示",
       "Local web-app demonstration": "本地网页应用演示",
       "The recorded demonstration shows the local browser interface, scenario setup, model execution, live run status, summary charts, generated figures, and downloadable output files.": "录屏演示展示了本地浏览器界面、情景设置、模型运行、实时状态、汇总图表、生成图片和可下载输出文件。",
@@ -1293,27 +1310,58 @@ python web_app.py</pre>
       "Use the video controls to play the local workflow recording": "使用视频控件播放本地工作流录屏",
       "Demo Flow": "演示流程",
       "Start the local web app and open it in a browser.": "启动本地网页应用并在浏览器中打开。",
-      "Set scenario parameters or upload policy CSV files.": "设置情景参数或上传政策 CSV 文件。",
+      "Set scenario parameters or upload policy CSV files.": "设置情景参数或上传政策表格文件。",
       "Run the scenario and show live status and logs.": "运行情景并展示实时状态和日志。",
       "Review summary cards, trend views, generated figures, and downloadable outputs.": "查看汇总卡片、趋势图、生成图片和可下载结果。",
       "06 - Deployment": "06 - 部署",
       "Designed for local research use and future server access": "面向本地研究使用与未来服务器访问",
+      "The public project page can be hosted on GitHub Pages. The full simulation workflow requires a Python backend and can later be deployed on a controlled cloud server for authenticated access.": "公开项目页可通过静态网页托管发布；完整推演工作流需要后端服务，后续可部署到受控云服务器并提供认证访问。",
       "Local Research Mode": "本地研究模式",
+      "Run the application on a workstation and access the browser interface at `127.0.0.1:8765`.": "在工作站运行应用，并通过 `127.0.0.1:8765` 访问浏览器界面。",
       "Team Network Mode": "团队局域网模式",
+      "Host the service on a shared workstation and allow collaborators on the same network to access it.": "在共享工作站托管服务，允许同一网络内的协作者访问。",
       "Cloud Server Mode": "云服务器模式",
+      "Deploy the application behind authentication, reverse proxy, job control, and persistent result storage.": "结合身份认证、反向代理、任务控制和持久化结果存储部署应用。",
+      "# local preview": "# 本地预览",
+      "# browser": "# 浏览器",
+      "# server / LAN": "# 服务器 / 局域网",
       "07 - Example Outputs": "07 - 示例输出",
-      "Example scenario outputs are summarized without exposing raw model files": "展示示例情景结果，不公开核心模型文件",
+      "Example scenario outputs are summarized without exposing raw model files": "面向政策分析的示例情景结果",
+      "Example scenario outputs for policy interpretation": "面向政策分析的示例情景结果",
+      "The sample below uses aggregated market-level outputs from a demonstration run. It illustrates how the platform can communicate sales scale, electrification, battery demand, and emissions outcomes without publishing proprietary model internals.": "下方示例采用一次演示运行的市场层面汇总输出，展示平台如何呈现销量规模、电动化水平、电池需求和碳排放结果。",
+      "The sample below uses aggregated market-level outputs from a demonstration run. It illustrates how the platform can communicate sales scale, electrification, battery demand, and emissions outcomes for policy interpretation.": "下方示例采用一次演示运行的市场层面汇总输出，展示平台如何为政策分析呈现销量规模、电动化水平、电池需求和碳排放结果。",
+      "2031 simulated sales": "2031 年模拟销量",
+      "36.6M": "3660万",
+      "new vehicles": "新车",
+      "2031 BEV + PHEV share": "2031 年新能源占比",
+      "market-level share": "市场层面占比",
+      "2026-2031 certified emissions": "2026-2031 年认证碳排放",
+      "aggregate scenario change": "汇总情景变化",
+      "2031 battery demand": "2031 年电池需求",
+      "GWh": "吉瓦时",
+      "Market-Level Demonstration Trend": "市场层面演示趋势",
+      "High": "高",
+      "Low": "低",
+      "Sales": "销量",
+      "Certified emissions": "认证碳排放",
+      "Battery demand": "电池需求",
       "08 - Data and Traceability": "08 - 数据与可追踪性",
       "Structured inputs and run records support review and collaboration": "结构化输入与运行记录支持审查和合作",
+      "The workflow records input metadata, file versions, checksums, request parameters, run status, logs, summary outputs, and detailed output packages. This is useful for validating assumptions and comparing policy cases across teams.": "工作流记录输入元数据、文件版本、校验值、请求参数、运行状态、日志、汇总输出和详细结果包，便于跨团队验证假设并比较政策情景。",
       "Input registry": "输入登记",
+      "Policy, market, technology, vehicle, energy, and cost inputs are organized as versioned tabular files with metadata and checksums.": "政策、市场、技术、车辆、能源和成本输入以带有元数据与校验值的版本化表格文件组织。",
       "Run traceability": "运行可追踪",
+      "Each scenario can preserve request parameters, status records, logs, summary files, and output folders for later audit.": "每个情景都可保留请求参数、状态记录、日志、汇总文件和输出目录，便于后续审查。",
       "Comparative analysis": "对比分析",
+      "Baseline, strict, and customized policy cases can be compared through consistent indicators and downloadable result packages.": "基准、严格和自定义政策情景可通过一致指标和可下载结果包进行比较。",
       "09 - Contact": "09 - 联系方式",
       "Public preview now, full model release later": "当前为公开预览，完整模型后续发布",
       "This public repository presents the project and demonstration interface. The complete local execution package and core model are planned for a later release or controlled deployment.": "该公开仓库展示项目和演示界面。完整本地运行包和核心模型计划后续发布或以受控部署方式提供。",
-      "Contact: Xu Jiarui; Liu Haobing | College of Transportation, Tongji University | Email: 2410824@tongji.edu.cn": "Contact: Xu Jiarui; Liu Haobing | 同济大学交通学院 | Email: 2410824@tongji.edu.cn",
+      "Contact: Xu Jiarui; Liu Haobing | College of Transportation, Tongji University | Email: 2410824@tongji.edu.cn": "联系方式：徐家睿；刘昊兵 | 同济大学交通学院 | 邮箱：2410824@tongji.edu.cn",
+      "Contact: Xu Jiarui; Liu Haobing | College of Transportation, Tongji University |": "联系方式：徐家睿；刘昊兵 | 同济大学交通学院 |",
+      "Email: 2410824@tongji.edu.cn": "邮箱：2410824@tongji.edu.cn",
       "View Access Plan": "查看访问方案",
-      "China Vehicle Carbon Emission Policy Simulation Platform - Public project page for GitHub Pages": "中国汽车碳排放政策推演平台 - GitHub Pages 公开展示页"
+      "China Vehicle Carbon Emission Policy Simulation Platform - Public project page for GitHub Pages": "中国汽车碳排放政策推演平台 - 公开展示页"
     };
 
     const originalTextNodes = new WeakMap();
@@ -1344,7 +1392,7 @@ python web_app.py</pre>
       });
       document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
       document.title = lang === "zh" ? pageTranslations["China Vehicle Carbon Emission Policy Simulation Platform"] : "China Vehicle Carbon Emission Policy Simulation Platform";
-      document.getElementById("langToggle").textContent = lang === "zh" ? "English" : "中文";
+      document.getElementById("langToggle").textContent = lang === "zh" ? "英文" : "中文";
     }
 
     let currentLang = localStorage.getItem("cnCarbonLang") || "en";
