@@ -604,6 +604,13 @@
       background: #17212b;
     }
 
+    .demo-media video::cue {
+      font-size: 72%;
+      line-height: 1.25;
+      background: rgba(16, 24, 32, 0.78);
+      color: #fff;
+    }
+
     .demo-placeholder {
       position: absolute;
       inset: 0;
@@ -1061,8 +1068,7 @@
           <div class="demo-media">
             <video id="demoVideo" controls poster="" preload="metadata" onloadedmetadata="this.closest('.demo-media').classList.add('has-video')">
               <source src="assets/cn-emission-demo.mp4" type="video/mp4">
-              <track id="demoTrackEn" kind="subtitles" srclang="en" label="English" src="assets/cn-emission-demo.en.vtt" default>
-              <track id="demoTrackZh" kind="subtitles" srclang="zh" label="中文" src="assets/cn-emission-demo.zh.vtt">
+              <track id="demoSubtitleTrack" kind="subtitles" srclang="en" label="English" src="assets/cn-emission-demo.en.vtt" default>
             </video>
             <div class="demo-placeholder">
               <strong>Demo video</strong>
@@ -1400,9 +1406,20 @@ python web_app.py</pre>
 
     function syncVideoSubtitles(lang) {
       const video = document.getElementById("demoVideo");
-      if (!video || !video.textTracks) return;
-      [...video.textTracks].forEach(track => {
-        track.mode = track.language === lang ? "showing" : "disabled";
+      const track = document.getElementById("demoSubtitleTrack");
+      if (!video || !track) return;
+      const subtitle = lang === "zh"
+        ? { src: "assets/cn-emission-demo.zh.vtt", label: "中文", srclang: "zh" }
+        : { src: "assets/cn-emission-demo.en.vtt", label: "English", srclang: "en" };
+      if (!track.src.endsWith(subtitle.src)) {
+        track.src = subtitle.src;
+        track.label = subtitle.label;
+        track.srclang = subtitle.srclang;
+      }
+      requestAnimationFrame(() => {
+        [...video.textTracks].forEach(textTrack => {
+          textTrack.mode = "showing";
+        });
       });
     }
 
