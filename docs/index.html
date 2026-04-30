@@ -765,7 +765,12 @@
       gap: 6px;
     }
 
-    .contact-lines span {
+    .contact-lines span,
+    .contact-lines .contact-person {
+      display: block;
+    }
+
+    .contact-lines .contact-email {
       display: block;
     }
 
@@ -1214,8 +1219,8 @@ python web_app.py</pre>
             <h2>Public preview now, full model release later</h2>
             <p>This public repository presents the project and demonstration interface. The complete local execution package and core model are planned for a later release or controlled deployment.</p>
             <p class="contact-lines">
-              <span>Xu Jiarui, PhD Student, College of Transportation, Tongji University, Email: 2410824@tongji.edu.cn</span>
-              <span>Liu Haobing, Professor and Doctoral Supervisor, College of Transportation, Tongji University, Email: liuhaobing@tongji.edu.cn</span>
+              <span class="contact-person" data-contact="xjr"><span class="contact-main">Xu Jiarui, PhD Student, College of Transportation, Tongji University</span><span class="contact-email">Email: 2410824@tongji.edu.cn</span></span>
+              <span class="contact-person" data-contact="lhb"><span class="contact-main">Liu Haobing, Professor and Doctoral Supervisor, College of Transportation, Tongji University</span><span class="contact-email">Email: liuhaobing@tongji.edu.cn</span></span>
             </p>
           </div>
           <a class="button secondary" href="#deploy">View Access Plan</a>
@@ -1379,6 +1384,9 @@ python web_app.py</pre>
       "This public repository presents the project and demonstration interface. The complete local execution package and core model are planned for a later release or controlled deployment.": "该公开仓库展示项目和演示界面。完整本地运行包和核心模型计划后续发布或以受控部署方式提供。",
       "Xu Jiarui, PhD Student, College of Transportation, Tongji University, Email: 2410824@tongji.edu.cn": "许珈瑞，博士生，同济大学交通学院，邮箱：2410824@tongji.edu.cn",
       "Liu Haobing, Professor and Doctoral Supervisor, College of Transportation, Tongji University, Email: liuhaobing@tongji.edu.cn": "刘皓冰，教授，博导，同济大学交通学院，邮箱：liuhaobing@tongji.edu.cn",
+      "Xu Jiarui, PhD Student, College of Transportation, Tongji University": "许珈瑞，博士生，同济大学交通学院",
+      "Liu Haobing, Professor and Doctoral Supervisor, College of Transportation, Tongji University": "刘皓冰，教授，博导，同济大学交通学院",
+      "Email: liuhaobing@tongji.edu.cn": "邮箱：liuhaobing@tongji.edu.cn",
       "View Access Plan": "查看访问方案",
       "China Vehicle Carbon Emission Policy Simulation Platform - Public project page for GitHub Pages": "中国汽车碳排放政策推演平台 - 公开展示页"
     };
@@ -1412,7 +1420,27 @@ python web_app.py</pre>
       document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
       document.title = lang === "zh" ? pageTranslations["China Vehicle Carbon Emission Policy Simulation Platform"] : "China Vehicle Carbon Emission Policy Simulation Platform";
       document.getElementById("langToggle").textContent = lang === "zh" ? "英文" : "中文";
+      syncContactLayout(lang);
       syncVideoSubtitles(lang);
+    }
+
+    function syncContactLayout(lang) {
+      const contacts = {
+        xjr: {
+          en: ["Xu Jiarui, PhD Student, College of Transportation, Tongji University", "Email: 2410824@tongji.edu.cn"],
+          zh: ["许珈瑞，博士生，同济大学交通学院，邮箱：2410824@tongji.edu.cn"]
+        },
+        lhb: {
+          en: ["Liu Haobing, Professor and Doctoral Supervisor, College of Transportation, Tongji University", "Email: liuhaobing@tongji.edu.cn"],
+          zh: ["刘皓冰，教授，博导，同济大学交通学院，邮箱：liuhaobing@tongji.edu.cn"]
+        }
+      };
+      document.querySelectorAll("[data-contact]").forEach(item => {
+        const data = contacts[item.dataset.contact];
+        if (!data) return;
+        const lines = lang === "zh" ? data.zh : data.en;
+        item.innerHTML = lines.map((line, index) => `<span class="${index === 1 ? "contact-email" : "contact-main"}">${line}</span>`).join("");
+      });
     }
 
     function syncVideoSubtitles(lang) {
