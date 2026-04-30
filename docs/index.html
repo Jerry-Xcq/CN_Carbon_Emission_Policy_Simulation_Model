@@ -1059,8 +1059,10 @@
         </div>
         <div class="demo-frame">
           <div class="demo-media">
-            <video controls poster="" preload="metadata" onloadedmetadata="this.closest('.demo-media').classList.add('has-video')">
+            <video id="demoVideo" controls poster="" preload="metadata" onloadedmetadata="this.closest('.demo-media').classList.add('has-video')">
               <source src="assets/cn-emission-demo.mp4" type="video/mp4">
+              <track id="demoTrackEn" kind="subtitles" srclang="en" label="English" src="assets/cn-emission-demo.en.vtt" default>
+              <track id="demoTrackZh" kind="subtitles" srclang="zh" label="中文" src="assets/cn-emission-demo.zh.vtt">
             </video>
             <div class="demo-placeholder">
               <strong>Demo video</strong>
@@ -1393,6 +1395,15 @@ python web_app.py</pre>
       document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
       document.title = lang === "zh" ? pageTranslations["China Vehicle Carbon Emission Policy Simulation Platform"] : "China Vehicle Carbon Emission Policy Simulation Platform";
       document.getElementById("langToggle").textContent = lang === "zh" ? "英文" : "中文";
+      syncVideoSubtitles(lang);
+    }
+
+    function syncVideoSubtitles(lang) {
+      const video = document.getElementById("demoVideo");
+      if (!video || !video.textTracks) return;
+      [...video.textTracks].forEach(track => {
+        track.mode = track.language === lang ? "showing" : "disabled";
+      });
     }
 
     let currentLang = localStorage.getItem("cnCarbonLang") || "en";

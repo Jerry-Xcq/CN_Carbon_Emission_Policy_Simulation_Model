@@ -12,7 +12,14 @@ The homepage includes a video section. The demo video is expected at:
 docs/assets/cn-emission-demo.mp4
 ```
 
-The page automatically shows the video in the demo section.
+Subtitle tracks are expected at:
+
+```text
+docs/assets/cn-emission-demo.en.vtt
+docs/assets/cn-emission-demo.zh.vtt
+```
+
+The page automatically shows the video in the demo section and switches the subtitle track with the page language.
 
 ## Contact
 
