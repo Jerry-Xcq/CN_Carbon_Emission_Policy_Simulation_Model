@@ -23,9 +23,8 @@ The page automatically shows the video in the demo section and switches the subt
 
 ## Contact
 
-Xu Jiarui; Liu Haobing  
-College of Transportation, Tongji University  
-Email: 2410824@tongji.edu.cn
+Xu Jiarui, PhD Student, College of Transportation, Tongji University, Email: 2410824@tongji.edu.cn  
+Liu Haobing, Professor and Doctoral Supervisor, College of Transportation, Tongji University, Email: liuhaobing@tongji.edu.cn
 
 ## Publishing
 
