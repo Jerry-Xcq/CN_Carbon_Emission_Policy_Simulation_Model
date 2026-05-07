@@ -11,6 +11,14 @@ The public site introduces the project concept, workflow, deployment direction, 
 - Support for policy inputs, model run tracking, summary metrics, logs, and output files in the full local application
 - A deployment path from local research use to server-hosted access for broader collaboration
 
+## Local Web App
+
+This repository can include the local browser interface for configuring and running policy scenarios:
+
+- `web_app.py` provides a standard-library Python web server and browser UI.
+- `omega_web_runner.py` starts one isolated model process for each scenario run.
+- `WEB_APP_README.md` and `WEB_APP_README.en.md` describe local setup and operation.
+
 ## Collaboration Focus
 
 The project is designed to support:
@@ -27,6 +35,6 @@ Liu Haobing, Professor and Doctoral Supervisor, College of Transportation, Tongj
 
 ## Public Preview
 
-This repository currently publishes the project page only. The core simulation model and local execution package are planned for a later release stage.
+The GitHub Pages site introduces the project and demonstration workflow.
 
 The GitHub Pages site is built from the `docs/` directory.

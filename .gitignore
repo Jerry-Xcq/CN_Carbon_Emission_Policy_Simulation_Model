@@ -10,11 +10,13 @@ venv/
 env/
 
 # Local web app runtime outputs
+omega_model/
 web_runs/
 Final_*/
 web_server.log
 web_server.err.log
 *.log
+Start.txt
 
 # Local editor and OS files
 .vscode/
